@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" ng-app="suaApp">
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+   <link rel="stylesheet" href="../lib/assets/bootstrap.css" />
+   <link rel="stylesheet" href="../lib/assets/ng-grid.css" />
+   <link rel="stylesheet" href="../lib/assets/nprogress.css" />
+   <link rel="stylesheet" href="../css/app.css"/>
+  
+</head>
+<body ng-cloak>
+<!-- Navbar
+    ================================================== -->
+    <div ng-controller="NavCtrl">
+                <ul class="nav nav-tabs">
+                    <!--  li active-nav><a href=".#/login">Log in</a></li -->
+                    <li active-nav><a href=".#/">Home</a></li>
+                    <li active-nav><a href=".#/servicios">Servicios</a></li>
+                    <li active-nav><a href=".#/confianzas">Confianza</a></li>
+                    <!-- li><a href="/session/logout" data-ng-click="logout()">Log out</a></li -->
+                    <li><a href="/sessions/logout" data-ng-click="logout()">Log out</a></li>
+               </ul>
+               <div id="userInfo" access-level="accessLevels.user" class="pull-right">
+                    Welcome&nbsp;<strong>{{ user.username }}&nbsp;</strong>
+                    <span ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}' class="label">{{ user.role.title }}</span>
+               </div>
+    </div>
+
+	<div class="container">
+		<div ng-view></div>
+		<div data-ng-bind="error" data-ng-show="error" class="alert alert-error"></div>
+	</div>
+
+	<footer class="footer">
+    <div class="container">
+      <p>Angular seed app: v<span app-version></span></p>
+      <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a></p>
+    </div>
+  </footer>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>  
+  -->
+  
+  <script src="../lib/underscore-min-1.4.4.js"></script>
+  <script src="../lib/angular-1.2.8.js"></script>
+  <script src="../lib/angular-route-1.2.8.js"></script>
+  <script src="../lib/restangular-1.1.8.js"></script>
+  <script src="../lib/jquery-1.10.2.js"></script>
+  <script src="../lib/bootstrap-3.0.3.js"></script>
+  <script src="../lib/ui-bootstrap-tpls-0.10.0.js"></script>
+  <script src="../lib/ng-grid-2.0.7.js"></script>
+  <script src="../lib/ngProgress-1.0.3.js"></script>
+
+  <script src="../js/routingConfig.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/controllers.js"></script>
+  <script src="../js/services.js"></script>
+  <script src="../js/filters.js"></script>
+  <script src="../js/directives.js"></script>
+  <!-- script src="js/db.js"></script -->
+</body>
+</html>

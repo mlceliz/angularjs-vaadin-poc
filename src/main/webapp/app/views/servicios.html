@@ -1,0 +1,46 @@
+<div class="container" ng-show="showGrid == true">
+	<button class="btn btn-primary" ng-click="newService()">Nuevo</button>
+	<div class="gridStyle" ng-grid="serviciosGrid"></div>
+</div>
+<div class="container" ng-show="showForm == true">
+	<form class="form-horizontal well">
+		<fieldset>
+	    	<div class="control-group">
+		      <label class="control-label" for="id-servicio">Servicio </label>
+		      <div class="controls">
+		        <input type="text" class="input-min" placeholder="servicio" ng-model="servicio[0].servicio" id="id-servicio" required>
+		      </div>
+		    </div>
+		    <div class="control-group">
+		      <label class="control-label" for="descripcion">Descripcion</label>
+		      <div class="controls">
+		        <input type="text" class="input-min" placeholder="descripcion" ng-model="servicio[0].descripcion" required>
+		      </div>
+		    </div>
+		    <div class="control-group">
+		      <label class="control-label" for="url">URL</label>
+		      <div class="controls">
+		        <input type="text" class="input-min" placeholder="url" ng-model="servicio[0].url" required>
+		      </div>
+		    </div>
+		    <div class="control-group">
+		      <label class="control-label" for="certificado">Certificado</label>
+		      <div class="controls">
+		        <textarea class="span9" rows="20" cols="80" placeholder="certificado" ng-model="servicio[0].certificado"></textarea>
+		      </div>
+		    </div>
+
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn btn-primary" ng-click="saveService(servicio[0])">
+						<i class="icon-ok icon-white"></i>Actualizar
+					</button>
+					<button class="btn btn-danger" ng-click="showGrid=true; showForm=false;">
+						<i class="icon-remove icon-white"></i>Cancelar
+					</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+	<alert ng-repeat="alert in alerts" type="error">{{alert.msg}}</alert>
+</div>

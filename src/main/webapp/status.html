@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" ng-app="monitorApp">
+<head>
+	<meta charset="utf-8">
+	<title>Fenix status</title>
+	<link rel="stylesheet" href="./lib/assets/bootstrap.css" />
+	<link rel="stylesheet" href="./lib/assets/nprogress.css" />
+  <script type="text/javascript">
+    var vaadin = {
+      vaadinConfigurations: {
+        'vapp': {
+          appUri:'/vapp',
+          pathInfo: '/',
+          themeUri: '/VAADIN/themes/reindeer',
+          versionInfo : {}
+        }
+      }};
+  </script>
+  <!-- Load the style sheet -->
+  <link rel="stylesheet" type="text/css" href="/VAADIN/themes/reindeer/styles.css"/>  
+  <script language='javascript' src='/VAADIN/widgetsets/com.vaadin.terminal.gwt.DefaultWidgetSet/com.vaadin.terminal.gwt.DefaultWidgetSet.nocache.js'></script>
+
+</head>
+<body ng-cloak ng-controller="MonitorCtrl">
+  <div class="container">
+    <center>
+      <h1>Estado de Fenix</h1>
+      <h2><small>{{system.date | date:'dd/MM/yyyy HH:mm:ss'}}</small></h2>
+    </center>
+    <alert ng-repeat="alert in alerts" type="error">{{alert.msg}}</alert>
+    <br>
+    <h2>Sistema Operativo</h2>
+    <ul>
+      <li>Arquitetura: {{system.os.architecture}}</li>
+      <li>Sistema Operativo: {{system.os.name}}</li>
+      <li>Versión: {{system.os.version}}</li>
+      <li>Procesadores: {{system.os.processors}}</li>
+    </ul>
+    <br>
+    <h2>JMV</h2>
+    <ul>
+      <li>Proveedor:{{system.runtime.jvmVendor}}</li>
+      <li>JMV: {{system.runtime.jvmName}}-{{system.runtime.jvmVersion}}.{{system.runtime.jvmSubVersion}}</li>
+      <li>Fecha inicio: {{system.runtime.startTime | date:'dd/MM/yyyy HH:mm:ss'}}</li>
+      <li>Tiempo de ejecucion: {{system.runtime.upTime/(1000*60*60) | number:2}} horas</li>
+      <li>id: {{system.runtime.name}}</li>
+    </ul>
+    <br>
+    <h2>Memoria</h2>
+    <ul>
+      <li>Inicial: {{system.memory.init/1024 | number:2}} KB</li>
+      <li>Maxima: {{system.memory.max/1024 | number:2}} KB</li>
+      <li ng-class="{'danger': (system.memory.used/system.memory.max) > limit}">Usada: {{system.memory.used/1024 | number:2}} KB <strong>({{(system.memory.used/system.memory.max)*100
+          | number:2}}%)</strong></li>
+    </ul>
+    <br>
+    <h2>External Content</h2>
+    <div id="vapp" style="border: 2px solid green;"></div>
+    <!-- iframe ng-src="/vapp"></iframe -->
+  </div>
+  <iframe id="__gwt_historyFrame" style="width:0;height:0;border:0"></iframe>
+  <script src="./lib/underscore-min-1.4.4.js"></script>
+  <script src="./lib/angular-1.2.8.js"></script>
+  <script src="./lib/restangular-1.3.1.js"></script>
+  <script src="./lib/ngProgress-1.0.3.js"></script>
+  <script src="./js/monitorApp.js"></script>
+</body>
+</html>
