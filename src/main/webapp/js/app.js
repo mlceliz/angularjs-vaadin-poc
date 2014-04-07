@@ -1,23 +1,15 @@
 'use strict';
 
-var app = angular.module('suaApp', [ 'suaApp.controllers', 'suaApp.sercvices', 'suaApp.directives', 'ngRoute', 'ui.bootstrap', 'ngGrid', 'ngProgress', 'restangular' ]);
+var app = angular.module('vaadinApp', [ 'ngRoute', 'ui.bootstrap', 'ngProgress', 'restangular' ]);
 
 app.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/home.html',
-		controller : 'HomeCtrl',
+		controller : 'homeCtrl',
 	});
-	$routeProvider.when('/login', {
-		templateUrl : 'views/login.html',
-		controller : 'LoginCtrl',
-	});
-	$routeProvider.when('/servicios', {
-		templateUrl : 'views/servicios.html',
-		controller : 'ServicioCtrl',
-	});
-	$routeProvider.when('/confianzas', {
-		templateUrl : 'views/confianzas.html',
-		controller : 'ConfianzaCtrl',
+	$routeProvider.when('/vaadin', {
+		templateUrl : 'views/vaadin.html',
+		controller : 'vaadinCtrl',
 	});
 	$routeProvider.when('/404', {
 		templateUrl : '/404.html',
@@ -25,19 +17,29 @@ app.config(function($routeProvider) {
 	$routeProvider.otherwise({
 		redirectTo : '/404'
 	});
-}).run(function(Restangular, ngProgress) {
-	Restangular.setBaseUrl('/api');
+}).run(
+		function(Restangular, ngProgress) {
+			Restangular.setBaseUrl('/api');
 
-	// Use Request interceptor
-	Restangular.setRequestInterceptor(function(element, operation, route, url) {
-		ngProgress.reset();
-		ngProgress.start();
-		return element;
-	});
+			// Use Request interceptor
+			Restangular.setRequestInterceptor(function(element, operation, route, url) {
+				ngProgress.reset();
+				ngProgress.start();
+				return element;
+			});
 
-	// Use Response interceptor
-	Restangular.setResponseInterceptor(function(data, operation, what, url, response, deferred) {
-		ngProgress.complete();
-		return data;
-	});
+			// Use Response interceptor
+			Restangular.setResponseInterceptor(function(data, operation, what, url, response, deferred) {
+				ngProgress.complete();
+				return data;
+			});
+		});
+
+app.controller('vaadinCtrl', function($scope) {
+	var formulario = Math.floor((Math.random()*1000)+1); 
+	vaadin.vaadinConfigurations.vapp.windowName = "a&formulario="+ formulario +"&version=100&operacion=CREATE"
+});
+
+app.controller('homeCtrl', function($scope) {
+	
 });

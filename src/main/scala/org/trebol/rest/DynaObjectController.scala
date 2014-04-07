@@ -22,6 +22,4 @@ class DynaObjectController extends ScalatraServlet with JacksonJsonSupport with 
   get("/:id") {
     redirect(url(getDyno, "id" -> params("id")))
   }
-  
-
 }

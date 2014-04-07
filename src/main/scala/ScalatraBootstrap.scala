@@ -1,10 +1,9 @@
 import org.scalatra._
 import javax.servlet._
 import java.util.EnumSet
-import org.trebol.rest.MonitorController
 import org.trebol.auth.SUAController
 import org.trebol.auth.SUAFilter
-import org.trebol.rest.DynaObjectController
+import org.trebol.rest._
 
 class ScalatraBootstrap extends LifeCycle {
 
@@ -19,5 +18,6 @@ class ScalatraBootstrap extends LifeCycle {
     context.mount(new SUAController, "/api/sua/*")
 
     context.mount(new DynaObjectController, "/api/dyno/*")
+    context.mount(new UIController, "/ui/*")
   }
 }
